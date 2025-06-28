@@ -7,6 +7,7 @@ public class GrapplingGun : MonoBehaviour
     public LayerMask whatIsGrappleable;
     public Transform gunTip, camera, player;
     private float maxDistance = 100f;
+    private float minDistance = 1f;
     private SpringJoint joint;
 
     private Rigidbody hitObject;
@@ -24,7 +25,7 @@ public class GrapplingGun : MonoBehaviour
 
         if (hitObject != null)
         {
-            if (Vector3.Distance(transform.position, hitObject.position) >= 1f)
+            if (Vector3.Distance(transform.position, hitObject.position) >= minDistance)
             {
                 hitObject.linearVelocity = (transform.position - hitObject.position) * 5;  
             }
