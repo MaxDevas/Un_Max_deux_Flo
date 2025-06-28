@@ -351,8 +351,7 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.344, z: 0.153}
   m_LocalScale: {x: 0.17059, y: 0.23711, z: 0.61543}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 353317300}
+  m_Children: []
   m_Father: {fileID: 138452037}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &138452036
@@ -413,6 +412,7 @@ GameObject:
   - component: {fileID: 173858217}
   - component: {fileID: 173858219}
   - component: {fileID: 173858218}
+  - component: {fileID: 173858220}
   m_Layer: 0
   m_Name: Cylinder.002 (1)
   m_TagString: Untagged
@@ -441,6 +441,7 @@ Transform:
   - {fileID: 1255133095}
   - {fileID: 660846203}
   - {fileID: 2144945250}
+  - {fileID: 353317300}
   m_Father: {fileID: 138452037}
   m_LocalEulerAnglesHint: {x: 0, y: 94.859, z: 0}
 --- !u!23 &173858218
@@ -496,6 +497,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173858216}
   m_Mesh: {fileID: 8691780276856062721, guid: e0ead8d12c51fe24daedb864ce172678, type: 3}
+--- !u!114 &173858220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173858216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9fb1b764a3ee4e4a8337567d105d462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatIsGrappleable:
+    serializedVersion: 2
+    m_Bits: 0
+  gunTip: {fileID: 353317300}
+  camera: {fileID: 330585546}
+  player: {fileID: 1107745262}
 --- !u!1 &305422466
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,12 +708,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 353317299}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.39000013}
-  m_LocalScale: {x: 0.97133976, y: 0.97133994, z: 0.9914467}
+  m_LocalRotation: {x: -0.000000014785279, y: -0.73644674, z: -0.000000016095553,
+    w: 0.67649555}
+  m_LocalPosition: {x: -0.031, y: 0.0039, z: -0.0014}
+  m_LocalScale: {x: 0.006159883, y: 0.008561875, z: 0.02268275}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 103978868}
+  m_Father: {fileID: 173858217}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
 GameObject:
@@ -1219,6 +1239,7 @@ GameObject:
   - component: {fileID: 1107745266}
   - component: {fileID: 1107745267}
   - component: {fileID: 1107745268}
+  - component: {fileID: 1107745269}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1345,6 +1366,30 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1107745269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1107745260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b59ab7413d5804ab2c8f2b729cab48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickableLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  playerCameraTransform: {fileID: 330585546}
+  pickUpUI: {fileID: 0}
+  hitRange: 3
+  pickUpParent: {fileID: 0}
+  inHandItem: {fileID: 0}
+  interactionInput: {fileID: 0}
+  dropInput: {fileID: 0}
+  useInput: {fileID: 0}
+  pickUpSource: {fileID: 0}
 --- !u!1 &1116939290
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,8 @@ public class RotateGun : MonoBehaviour
     private float rotationSpeed = 5f;
 
     void Update() {
+        if(grappling == null) return;
+
         if (!grappling.IsGrappling()) {
             desiredRotation = transform.parent.rotation;
         }
