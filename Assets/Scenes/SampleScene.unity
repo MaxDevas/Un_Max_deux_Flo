@@ -295,7 +295,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -575,9 +575,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1107745262}
   - component: {fileID: 1107745261}
-  - component: {fileID: 1107745264}
   - component: {fileID: 1107745263}
-  - component: {fileID: 1107745265}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -640,39 +638,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e73388fbaf6d326419d30741b28a751a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  walkingSpeed: 7.5
+  runningSpeed: 11.5
+  jumpSpeed: 8
   gravity: -19.62
-  jumpHeight: 3
-  groundCheck: {fileID: 305422467}
-  groundDistance: 0.4
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 8
---- !u!114 &1107745264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1107745260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4257f329e036aac41b57170bac84571d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseSensitivity: 120
---- !u!114 &1107745265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1107745260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 825ae241c535a3742abbe679bf25e29f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
+  lookSpeed: 2
+  lookXLimit: 85
+  canMove: 1
 --- !u!1 &1605973184
 GameObject:
   m_ObjectHideFlags: 0
