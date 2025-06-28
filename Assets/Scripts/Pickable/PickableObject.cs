@@ -8,15 +8,21 @@ public class PickableObject : MonoBehaviour, IPickable
     public bool KeepWorldPosition { get; private set; } = true;
 
     Rigidbody rb;
+    Collider mc;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        //mc = GetComponent<Collider>();
     }
     public GameObject PickUp()
     {
         if (rb != null)
             rb.isKinematic = true;
+        //if (mc != null)
+        //    mc.isTrigger = true;
+
+        mc.enabled = false;
 
         return gameObject;
     }

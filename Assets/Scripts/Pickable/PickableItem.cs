@@ -8,11 +8,13 @@ public class PickableItem : MonoBehaviour, IPickable
 	public bool KeepWorldPosition { get; private set; }
 
 	private Rigidbody rb;
+    Collider mc;
 
-	private void Awake()
+    private void Awake()
 	{
 		rb = GetComponent<Rigidbody>();
-	}
+        mc = GetComponent<Collider>();
+    }
 
 	public GameObject PickUp()
 	{
@@ -20,8 +22,14 @@ public class PickableItem : MonoBehaviour, IPickable
 		{
 			rb.isKinematic = true;
 		}
-		transform.position = Vector3.zero;
+
+        //if (mc != null)
+        //{
+        //    mc.isTrigger = true;
+        //}
+        transform.position = Vector3.zero;
 		transform.rotation = Quaternion.identity;
+
 		return this.gameObject;
 	}
 }

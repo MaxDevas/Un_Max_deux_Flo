@@ -58,10 +58,13 @@ public class Player : MonoBehaviour
 		{
 			inHandItem.transform.SetParent(null);
 			inHandItem = null;
+			Debug.Log(hit);
 			Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
-			if (rb != null)
+            Debug.Log(hit);
+            if (rb != null)
 			{
 				rb.isKinematic = false;
+				rb.GetComponent<Collider>().enabled = true;
 			}
 		}
 	}
@@ -73,11 +76,27 @@ public class Player : MonoBehaviour
 			IPickable pickableItem = hit.collider.GetComponent<IPickable>();
 			if (pickableItem != null)
 			{
-				//pickUpSource.Play();	//Mettre une source audio avant de réactiver ce code. ==> Son pour "attraper" un objet.
-				inHandItem = pickableItem.PickUp();
-				inHandItem.transform.SetParent(pickUpParent.transform, pickableItem.KeepWorldPosition);
-				//inHandItem.transform.position = new Vector3(1f, 0f, 0.5f);
-			}
+				if (hit.collider.GetComponent<Weapon>())
+				{
+					//pickUpSource.Play();	//Mettre une source audio avant de réactiver ce code. ==> Son pour "attraper" un objet.
+					inHandItem = pickableItem.PickUp();
+					//inHandItem.transform.SetParent(pickUpParent.transform, false);
+					inHandItem.transform.parent = pickUpParent;
+					inHandItem.transform.localPosition = Vector3.zero;
+                    //inHandItem.transform.SetParent(pickUpParent.transform, pickableItem.KeepWorldPosition);
+                    //inHandItem.transform.SetPositionAndRotation(pickUpParent.position, pickUpParent.rotation);
+					/*Vector3 mini_deplacement = new Vector3(0.4f, -0.31f, 0.63f);
+					Vector3 mini_rotation = new Vector3(1.33f, 97.85f, -5.19f);
+					inHandItem.transform.position = inHandItem.transform.position + mini_deplacement;
+					inHandItem.transform.rotation = inHandItem.transform.rotation * Quaternion.Euler(mini_rotation);*/
+
+				}
+                else if (hit.collider.GetComponent<Item>())
+				{
+
+				}
+
+            }
 
 			//Debug.Log(hit.collider.name);
 			//Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
@@ -117,10 +136,24 @@ public class Player : MonoBehaviour
 			pickUpUI.SetActive(false);
 		}
 
-		/*if (inHandItem != null)
+		// input F
+		if (Input.GetKeyDown(KeyCode.F))
+		{
+			Debug.Log(hit);
+			if (inHandItem == null)
+			{
+				PickUp();
+			}
+            else if (inHandItem != null)
+            {
+                Drop();
+            }
+        }
+
+		if (inHandItem != null)
 		{
 			return;
-		}*/
+		}
 
 		if (Physics.Raycast(
 			playerCameraTransform.position,
@@ -133,17 +166,6 @@ public class Player : MonoBehaviour
 			pickUpUI.SetActive(true);
 		}
 
-		// input F
-		if (Input.GetKeyDown(KeyCode.F))
-		{
-			if (inHandItem == null)
-			{
-				PickUp();
-			}
-            else if (inHandItem != null)
-            {
-                Drop();
-            }
-        }
+		
 	}
 }
