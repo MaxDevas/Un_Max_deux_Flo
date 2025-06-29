@@ -5,6 +5,7 @@ public class Object : MonoBehaviour
 {
     private Rigidbody rb;
     private Collider mc;
+    public bool pickedUp = false;
     
     private void Awake()
     {
@@ -16,8 +17,11 @@ public class Object : MonoBehaviour
     {
         Debug.Log("object-pickup");
         if (rb != null)
+        {
             rb.isKinematic = true;
-
+            pickedUp = true;
+        }
         return gameObject;
     }
+
 }

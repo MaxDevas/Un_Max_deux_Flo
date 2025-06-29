@@ -10,8 +10,9 @@ public class Weapon : MonoBehaviour, IUsable
 
 	private Rigidbody rb;
     private Collider mc;
+    public bool pickedUp = false;
 
-	public void Use(GameObject actor)
+    public void Use(GameObject actor)
 	{
 		OnUse?.Invoke();
 	}
@@ -21,10 +22,11 @@ public class Weapon : MonoBehaviour, IUsable
         rb = GetComponent<Rigidbody>();
         mc = GetComponent<Collider>();
 
-		if (rb != null)
+		pickedUp = true;
+        if (rb != null)
 		{
 			rb.isKinematic = true;
-		}
+        }
 
 		if (mc != null)
 		{

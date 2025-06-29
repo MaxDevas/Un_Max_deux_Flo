@@ -7,6 +7,7 @@ public class Item : MonoBehaviour, IUsable
     public UnityEvent OnUse { get; private set; }
     private Rigidbody rb;
     private Collider mc;
+    public bool pickedUp = false;
 
     public void Use(GameObject actor)
     {
@@ -19,11 +20,12 @@ public class Item : MonoBehaviour, IUsable
 	{
         rb = GetComponent<Rigidbody>();
         mc = GetComponent<Collider>();
+        pickedUp = true;
 
-		if (rb != null)
+        if (rb != null)
 		{
 			rb.isKinematic = true;
-		}
+        }
 
 		if (mc != null)
 		{

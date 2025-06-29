@@ -2,6 +2,14 @@ using UnityEngine;
 
 public class GrapplingGun : MonoBehaviour
 {
+    public GameObject ventousePrefab;
+    //public GameObject cable;
+    public Transform ventouseSpawn;
+    public float ventouseVelocity = 30f;
+    //private void FireVentouse()
+    //{
+    //    GameObject ventouse = Instantiate(ventousePrefab, ventouseSpawn);
+    //}
     private LineRenderer lr;
     private Vector3 grapplePoint;
     public LayerMask whatIsGrappleable;
@@ -11,29 +19,45 @@ public class GrapplingGun : MonoBehaviour
     private SpringJoint joint;
 
     private Rigidbody hitObject;
+    
+    private Weapon weapon;
 
     void Awake() {
-        lr = GetComponent<LineRenderer>();
+        if (weapon == null)
+        {
+            weapon = GetComponent<Weapon>();
+        }
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        
+        Debug.Log(weapon.pickedUp);
+
+        if (weapon.pickedUp == true)
         {
-            StartGrapple();
+            if (Input.GetMouseButtonDown(0))
+            {
+                StartGrapple();
+            }
+
+            if (hitObject != null)
+            {
+
+                hitObject.GetComponent<Collider>().isTrigger = true;
+                if (Vector3.Distance(transform.position, hitObject.position) >= minDistance)
+                {
+                    hitObject.linearVelocity = (transform.position - hitObject.position) * 5;  
+                }
+                else
+                {
+                    hitObject.GetComponent<Collider>().isTrigger = false;
+                    StopGrapple();
+                }
+            }
         }
 
-        if (hitObject != null)
-        {
-            if (Vector3.Distance(transform.position, hitObject.position) >= minDistance)
-            {
-                hitObject.linearVelocity = (transform.position - hitObject.position) * 5;  
-            }
-            else
-            {
-                StopGrapple();
-            }
-        }
+            
         
             
     }
@@ -47,9 +71,12 @@ public class GrapplingGun : MonoBehaviour
     /// Call whenever we want to start a grapple
     /// </summary>
     void StartGrapple() {
+        
         RaycastHit hit;
+
         if (Physics.Raycast(camera.position, camera.forward, out hit, maxDistance, whatIsGrappleable))
         {
+            Debug.Log(hit.transform.name);
             grapplePoint = hit.point;
 
             hitObject = hit.collider.GetComponent<Rigidbody>();

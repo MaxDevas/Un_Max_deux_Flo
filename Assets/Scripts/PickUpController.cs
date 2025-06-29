@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.InputSystem;
@@ -60,6 +61,20 @@ public class PickUpController : MonoBehaviour
 		if (inHandItem != null)
 		{
 			inHandItem.transform.SetParent(null);
+			if (inHandItem.GetComponent<Object>())
+			{
+				inHandItem.GetComponent<Object>().pickedUp = false;
+			}
+			if (inHandItem.GetComponent<Item>())
+			{
+				inHandItem.GetComponent<Item>().pickedUp = false;
+			}
+			if (inHandItem.GetComponent<Weapon>())
+			{
+				inHandItem.GetComponent<Weapon>().pickedUp = false;
+			}
+			
+			
 			inHandItem = null;
 			Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
             if (rb != null)
@@ -81,19 +96,11 @@ public class PickUpController : MonoBehaviour
 			if (pickableItem != null)
 			{
 				inHandItem = pickableItem.PickUp();
-
+				
 				//inHandItem.transform.SetParent(pickUpParent.transform, false);
 
 				inHandItem.transform.parent = pickUpParent;
 				inHandItem.transform.localPosition = Vector3.zero;
-			}
-			else if (pickableObject != null)
-			{
-				inHandItem = pickableObject.PickUp();
-
-				//inHandItem.transform.SetParent(pickUpParent.transform, false);
-
-				inHandItem.transform.parent = pickUpParent;
 			}
 			else if (pickableWeapon != null)
 			{
@@ -104,34 +111,42 @@ public class PickUpController : MonoBehaviour
 				inHandItem.transform.parent = pickUpParent;
 				inHandItem.transform.localPosition = Vector3.zero;
 			}
+            else if (pickableObject != null)
+            {
+                inHandItem = pickableObject.PickUp();
 
-			//Debug.Log(hit.collider.name);
-			//Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
-			//if (hit.collider.GetComponent<Food>() || hit.collider.GetComponent<Weapon>())
-			//{
-			//    Debug.Log("It's food!");
-			//    inHandItem = hit.collider.gameObject;
-			//    inHandItem.transform.position = Vector3.zero;
-			//    inHandItem.transform.rotation = Quaternion.identity;
-			//    inHandItem.transform.SetParent(pickUpParent.transform, false);
-			//    if(rb != null)
-			//    {
-			//        rb.isKinematic = true;
-			//    }
-			//    return;
-			//}
-			//if (hit.collider.GetComponent<Item>())
-			//{
-			//    Debug.Log("It's a useless item!");
-			//    inHandItem = hit.collider.gameObject;
-			//    inHandItem.transform.SetParent(pickUpParent.transform, true);
-			//    if (rb != null)
-			//    {
-			//        rb.isKinematic = true;
-			//    }
-			//    return;
-			//}
-		}
+                //inHandItem.transform.SetParent(pickUpParent.transform, false);
+
+                inHandItem.transform.parent = pickUpParent;
+            }
+
+            //Debug.Log(hit.collider.name);
+            //Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+            //if (hit.collider.GetComponent<Food>() || hit.collider.GetComponent<Weapon>())
+            //{
+            //    Debug.Log("It's food!");
+            //    inHandItem = hit.collider.gameObject;
+            //    inHandItem.transform.position = Vector3.zero;
+            //    inHandItem.transform.rotation = Quaternion.identity;
+            //    inHandItem.transform.SetParent(pickUpParent.transform, false);
+            //    if(rb != null)
+            //    {
+            //        rb.isKinematic = true;
+            //    }
+            //    return;
+            //}
+            //if (hit.collider.GetComponent<Item>())
+            //{
+            //    Debug.Log("It's a useless item!");
+            //    inHandItem = hit.collider.gameObject;
+            //    inHandItem.transform.SetParent(pickUpParent.transform, true);
+            //    if (rb != null)
+            //    {
+            //        rb.isKinematic = true;
+            //    }
+            //    return;
+            //}
+        }
 	}
 
 	private void Update()

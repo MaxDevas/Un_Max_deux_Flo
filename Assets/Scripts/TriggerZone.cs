@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class TriggerZone : MonoBehaviour
 {
+    public GameObject objetDeco;
+    public GameObject emplacementDeco;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
