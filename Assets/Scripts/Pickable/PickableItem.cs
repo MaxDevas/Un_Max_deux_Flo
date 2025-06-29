@@ -23,11 +23,11 @@ public class PickableItem : MonoBehaviour, IPickable
 			rb.isKinematic = true;
 		}
 
-        //if (mc != null)
-        //{
-        //    mc.isTrigger = true;
-        //}
-        transform.position = Vector3.zero;
+		if (mc != null)
+		{
+			mc.isTrigger = true;
+		}
+		transform.position = Vector3.zero;
 		transform.rotation = Quaternion.identity;
 
 		return this.gameObject;

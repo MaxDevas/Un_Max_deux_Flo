@@ -13,16 +13,13 @@ public class PickableObject : MonoBehaviour, IPickable
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        //mc = GetComponent<Collider>();
     }
     public GameObject PickUp()
     {
+        Debug.Log(mc);
         if (rb != null)
             rb.isKinematic = true;
-        //if (mc != null)
-        //    mc.isTrigger = true;
 
-        mc.enabled = false;
 
         return gameObject;
     }
