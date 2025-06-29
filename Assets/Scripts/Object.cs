@@ -16,10 +16,11 @@ public class Object : MonoBehaviour
     public GameObject PickUp()
     {
         Debug.Log("object-pickup");
+        
+            pickedUp = true;
         if (rb != null)
         {
             rb.isKinematic = true;
-            pickedUp = true;
         }
         return gameObject;
     }

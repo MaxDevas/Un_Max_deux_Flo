@@ -32,8 +32,6 @@ public class GrapplingGun : MonoBehaviour
     void Update()
     {
         
-        Debug.Log(weapon.pickedUp);
-
         if (weapon.pickedUp == true)
         {
             if (Input.GetMouseButtonDown(0))
