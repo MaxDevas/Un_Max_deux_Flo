@@ -61,9 +61,7 @@ public class PickUpController : MonoBehaviour
 		{
 			inHandItem.transform.SetParent(null);
 			inHandItem = null;
-			Debug.Log(hit);
 			Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
-            Debug.Log(hit);
             if (rb != null)
 			{
 				rb.isKinematic = false;
@@ -76,43 +74,36 @@ public class PickUpController : MonoBehaviour
 	{
 		if (hit.collider != null && inHandItem == null)
 		{
-			IPickable pickableItem = hit.collider.GetComponent<IPickable>();
+			Item pickableItem = hit.collider.GetComponent<Item>();
+			Object pickableObject = hit.collider.GetComponent<Object>();
+			Weapon pickableWeapon = hit.collider.GetComponent<Weapon>();
+
 			if (pickableItem != null)
 			{
-				if (hit.collider.GetComponent<Weapon>())
-				{
-					//pickUpSource.Play();	//Mettre une source audio avant de réactiver ce code. ==> Son pour "attraper" un objet.
-					inHandItem = pickableItem.PickUp();
-					//inHandItem.transform.SetParent(pickUpParent.transform, true);
+				inHandItem = pickableItem.PickUp();
 
-                    Debug.Log("HzzzEy");
+				//inHandItem.transform.SetParent(pickUpParent.transform, false);
 
-					inHandItem.transform.parent = pickUpParent;
-					inHandItem.transform.localPosition = Vector3.zero;
+				inHandItem.transform.parent = pickUpParent;
+				inHandItem.transform.localPosition = Vector3.zero;
+			}
+			else if (pickableObject != null)
+			{
+				inHandItem = pickableObject.PickUp();
 
-					//inHandItem.transform.SetParent(pickUpParent.transform, pickableItem.KeepWorldPosition);
-					//inHandItem.transform.SetPositionAndRotation(pickUpParent.position, pickUpParent.rotation);
-					/*Vector3 mini_deplacement = new Vector3(0.4f, -0.31f, 0.63f);
-					Vector3 mini_rotation = new Vector3(1.33f, 97.85f, -5.19f);
-					inHandItem.transform.position = inHandItem.transform.position + mini_deplacement;
-					inHandItem.transform.rotation = inHandItem.transform.rotation * Quaternion.Euler(mini_rotation);*/
+				//inHandItem.transform.SetParent(pickUpParent.transform, false);
 
-				}
-                else if (hit.collider.GetComponent<Item>())
-				{
-					Debug.Log(pickableItem);
-                    inHandItem = pickableItem.PickUp();
+				inHandItem.transform.parent = pickUpParent;
+			}
+			else if (pickableWeapon != null)
+			{
+				//pickUpSource.Play();	//Mettre une source audio avant de rï¿½activer ce code. ==> Son pour "attraper" un objet.
+				inHandItem = pickableWeapon.PickUp();
+				//inHandItem.transform.SetParent(pickUpParent.transform, true);
 
-                    Debug.Log("HEy");
-                    //inHandItem.transform.SetParent(pickUpParent.transform, false);
-
-                    Debug.Log("HEy");
-
-					inHandItem.transform.parent = pickUpParent;
-					//inHandItem.transform.localPosition = Vector3.zero;
-				}
-
-            }
+				inHandItem.transform.parent = pickUpParent;
+				inHandItem.transform.localPosition = Vector3.zero;
+			}
 
 			//Debug.Log(hit.collider.name);
 			//Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
@@ -150,12 +141,11 @@ public class PickUpController : MonoBehaviour
 		{
 			hit.collider.GetComponent<Highlight>()?.ToggleHighlight(false);
 			pickUpUI.SetActive(false);
-		}
+		}	
 
 		// input F
 		if (Input.GetKeyDown(KeyCode.F))
 		{
-			Debug.Log(hit);
 			if (inHandItem == null)
 			{
 				PickUp();
