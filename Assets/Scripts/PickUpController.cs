@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.Animations;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Android;
@@ -184,6 +186,16 @@ public class PickUpController : MonoBehaviour
 			pickableLayerMask))
 		{
 			hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);
+			if (hit.collider.GetComponent<Weapon>())
+			{
+				var child = pickUpUI.transform.GetChild(0);
+				child.GetComponent<TMP_Text>()?.SetText("C'est dangereux d'y aller seul !\nAppuie sur F pour prendre.");
+			}
+			else
+			{
+				var child = pickUpUI.transform.GetChild(0);
+				child.GetComponent<TMP_Text>()?.SetText("Appuie sur F pour prendre.");
+			}
 			pickUpUI.SetActive(true);
 		}
 
