@@ -16,7 +16,7 @@ public class ScieBarreau : MonoBehaviour, IInteractable
     public void Interact()
     {
         Debug.Log("Hey");
-
+        AudioManager.Instance.playSound(AudioManager.AudioType.Scie, AudioManager.AudioSourceType.Player);
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = false;
 

@@ -17,7 +17,7 @@ public class MailletDestruction : MonoBehaviour, IInteractable
     public void Interact()
     {
         Debug.Log("Hey");
-
+        AudioManager.Instance.playSound(AudioManager.AudioType.Maillet, AudioManager.AudioSourceType.Player);
         collider = GetComponent<Collider>();
         renderer = GetComponent<Renderer>();
         collider.enabled = false;
