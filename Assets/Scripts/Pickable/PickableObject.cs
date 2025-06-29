@@ -7,20 +7,20 @@ public class PickableObject : MonoBehaviour, IPickable
     [field: SerializeField]
     public bool KeepWorldPosition { get; private set; } = true;
 
-    Rigidbody rb;
+    private Rigidbody rb;
     Collider mc;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        mc = GetComponent<Collider>();
     }
     public GameObject PickUp()
     {
-        Debug.Log(mc);
+        Debug.Log("pickableObject");
         if (rb != null)
             rb.isKinematic = true;
 
-
-        return gameObject;
+		return gameObject;
     }
 }

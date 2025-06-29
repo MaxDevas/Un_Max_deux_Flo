@@ -26,10 +26,10 @@ public class PlayerMovement : MonoBehaviour
     public float maxSlopeAngle = 35f;
 
     //Crouch & Slide
-    private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
+    /*private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
     private Vector3 playerScale;
     public float slideForce = 400;
-    public float slideCounterMovement = 0.2f;
+    public float slideCounterMovement = 0.2f;*/
 
     //Jumping
     private bool readyToJump = true;
@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     }
     
     void Start() {
-        playerScale =  transform.localScale;
+        //playerScale =  transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -74,13 +74,13 @@ public class PlayerMovement : MonoBehaviour
         crouching = Input.GetKey(KeyCode.LeftControl);
       
         //Crouching
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        /*if (Input.GetKeyDown(KeyCode.LeftControl))
             StartCrouch();
         if (Input.GetKeyUp(KeyCode.LeftControl))
-            StopCrouch();
+            StopCrouch();*/
     }
 
-    private void StartCrouch() {
+    /*private void StartCrouch() {
         transform.localScale = crouchScale;
         transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
         if (rb.linearVelocity.magnitude > 0.5f) {
@@ -93,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
     private void StopCrouch() {
         transform.localScale = playerScale;
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
-    }
+    }*/
 
     private void Movement() {
         //Extra gravity
@@ -186,10 +186,10 @@ public class PlayerMovement : MonoBehaviour
         if (!grounded || jumping) return;
 
         //Slow down sliding
-        if (crouching) {
+        /*if (crouching) {
             rb.AddForce(moveSpeed * Time.deltaTime * -rb.linearVelocity.normalized * slideCounterMovement);
             return;
-        }
+        }*/
 
         //Counter movement
         if (Math.Abs(mag.x) > threshold && Math.Abs(x) < 0.05f || (mag.x < -threshold && x > 0) || (mag.x > threshold && x < 0)) {

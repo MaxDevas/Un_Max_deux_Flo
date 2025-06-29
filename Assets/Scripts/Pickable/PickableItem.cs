@@ -18,6 +18,7 @@ public class PickableItem : MonoBehaviour, IPickable
 
 	public GameObject PickUp()
 	{
+		Debug.Log("pickableitem");
 		if (rb != null)
 		{
 			rb.isKinematic = true;
